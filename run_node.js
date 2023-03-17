@@ -27,6 +27,6 @@ app.post("/ccavResponseHandler", function (request, response) {
 });
 
 app.listen(PORT, function (res, req) {
-  console.log(" app listening on port 3001!");
+  console.log(`App listening on port ${PORT}!`);
   // console.log(process.env); // remove this after you've confirmed it is working
 });
