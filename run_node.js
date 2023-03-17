@@ -1,5 +1,6 @@
 var express = require("express");
 var app = express();
+const PORT = process.env.PORT || 3001;
 var dotenv = require("dotenv").config();
 var http = require("http"),
   fs = require("fs"),
@@ -25,7 +26,7 @@ app.post("/ccavResponseHandler", function (request, response) {
   ccavResHandler.postRes(request, response);
 });
 
-app.listen(3001, function (res, req) {
+app.listen(PORT, function (res, req) {
   console.log(" app listening on port 3001!");
-  console.log(process.env); // remove this after you've confirmed it is working
+  // console.log(process.env); // remove this after you've confirmed it is working
 });
