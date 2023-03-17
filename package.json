@@ -1,0 +1,26 @@
+{
+  "name": "nonseamless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "run_node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node run_node.js",
+    "dev": "nodemon run_node.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.21",
+    "querystring": "^0.2.1"
+  }
+}
