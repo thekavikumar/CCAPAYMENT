@@ -11,36 +11,32 @@
 			</caption>
 		</table>
 		<table width="40%" height="100" border='1' align="center">
-			<tr>
-				<td>Parameter Name:</td>
-				<td>Parameter Value:</td>
-			</tr>
-			<tr>
-				<td colspan="2">Compulsory information</td>
-			</tr>
-			<tr>
+			<tr hidden>
 				<td>Merchant Id</td>
 				<td><input type="text" name="merchant_id" id="merchant_id" value="2156706" /> </td>
 			</tr>
 			<tr>
 				<td>Order Id</td>
-				<td><input type="text" name="order_id" value="21234124" /></td>
+				<td><input type="text" name="order_dup" id="order_dup" disabled /></td>
+				<td hidden><input type="text" name="order_id" id="order_id" /></td>
 			</tr>
 			<tr>
 				<td>Currency</td>
-				<td><input type="text" name="currency" value="INR" /></td>
+				<td><input type="text" name="currency_dup" value="INR" disabled /></td>
+				<td hidden><input type="text" name="currency" value="INR" /></td>
 			</tr>
 			<tr>
 				<td>Amount</td>
-				<td><input type="text" name="amount" value="1.00" /></td>
+				<td><input id="dup" type="text" disabled></input></td>
+				<td hidden><input type="text" name="amount" id="amount" value="1" /></td>
 			</tr>
-			<tr>
+			<tr hidden>
 				<td>Redirect URL</td>
 				<td><input type="text" name="redirect_url"
 						value="https://payment.tantrotsav.co.in/ccavResponseHandler" />
 				</td>
 			</tr>
-			<tr>
+			<tr hidden>
 				<td>Cancel URL</td>
 				<td><input type="text" name="cancel_url" value="https://payment.tantrotsav.co.in/ccavResponseHandler" />
 				</td>
@@ -55,6 +51,24 @@
 			</tr>
 		</table>
 	</form>
+
+	<script>
+		// Get the query string from the URL
+		const queryString = window.location.search;
+
+		// Parse the query string to get an object of key-value pairs
+		const urlParams = new URLSearchParams(queryString);
+
+		// Get the value of the 'param' parameter from the URL
+		const paramValue = urlParams.get('amount');
+		const orderParam = urlParams.get('orderID');
+
+		// Set the value of the input element to the parameter value
+		document.getElementById('amount').value = paramValue;
+		document.getElementById('dup').value = paramValue;
+		document.getElementById('order_id').value = orderParam;
+		document.getElementById('order_dup').value = orderParam;
+	</script>
 </body>
 
 </html>
