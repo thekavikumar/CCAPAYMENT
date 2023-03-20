@@ -1,71 +1,155 @@
 <html>
 
 <head>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script> -->
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Poppins', sans-serif;
+		}
+
+		.sub {
+			padding: 10px;
+			border: 1px solid #000;
+			background: #000;
+			color: #fff;
+			cursor: pointer;
+			border-radius: 3px;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+
+		.title {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td {
+			padding: 10px;
+		}
+
+		input {
+			outline: none;
+			border: none;
+		}
+
+		img {
+			width: 400px;
+			margin-bottom: 40px;
+		}
+	</style>
+
 </head>
 
 <body>
-	<form method="POST" name="customerData" action="/ccavRequestHandler">
-		<table width="40%" height="100" border='1' align="center">
-			<caption>
-				<font size="4" color="blue"><b>Integration Kit</b></font>
-			</caption>
-		</table>
-		<table width="40%" height="100" border='1' align="center">
-			<tr hidden>
-				<td>Merchant Id</td>
-				<td><input type="text" name="merchant_id" id="merchant_id" value="2156706" /> </td>
-			</tr>
-			<tr>
-				<td>Order Id</td>
-				<td><input type="text" name="order_dup" id="order_dup" disabled /></td>
-				<td hidden><input type="text" name="order_id" id="order_id" /></td>
-			</tr>
-			<tr>
-				<td>Currency</td>
-				<td><input type="text" name="currency_dup" value="INR" disabled /></td>
-				<td hidden><input type="text" name="currency" value="INR" /></td>
-			</tr>
-			<tr>
-				<td>Amount</td>
-				<td><input id="dup" type="text" disabled></input></td>
-				<td hidden><input type="text" name="amount" id="amount" value="1" /></td>
-			</tr>
-			<tr hidden>
-				<td>Redirect URL</td>
-				<td><input type="text" name="redirect_url"
-						value="https://payment.tantrotsav.co.in/ccavResponseHandler" />
-				</td>
-			</tr>
-			<tr hidden>
-				<td>Cancel URL</td>
-				<td><input type="text" name="cancel_url" value="https://payment.tantrotsav.co.in/ccavResponseHandler" />
-				</td>
-			</tr>
-			<tr>
-				<td>Language</td>
-				<td><input type="text" name="language" id="language" value="EN" /></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><INPUT TYPE="submit" value="Checkout"></td>
-			</tr>
-		</table>
-	</form>
-
+	<div class="container">
+		<img src="https://dt19wmazj2dns.cloudfront.net/wp-content/uploads/2023/01/amrita-c20-logo-colored.svg"
+			alt="logo">
+		<form method="POST" name="customerData" action="/ccavRequestHandler">
+			<h1 class="title">CHECKOUT</h1>
+			<table width="40%" height="100" border='1' align="center">
+				<tr hidden>
+					<td>Merchant Id</td>
+					<td><input type="text" name="merchant_id" id="merchant_id" value="2156706" /> </td>
+				</tr>
+				<tr>
+					<td>Order Id</td>
+					<td><input type="text" name="order_dup" id="order_dup" disabled /></td>
+					<td hidden><input type="text" name="order_id" id="order_id" /></td>
+				</tr>
+				<tr>
+					<td>Currency</td>
+					<td><input type="text" name="currency_dup" value="INR" disabled /></td>
+					<td hidden><input type="text" name="currency" value="INR" /></td>
+				</tr>
+				<tr>
+					<td>Amount</td>
+					<td><input id="dup" type="text" disabled></input></td>
+					<td hidden><input type="text" name="amount" id="amount" value="1" /></td>
+				</tr>
+				<tr hidden>
+					<td>Redirect URL</td>
+					<td><input type="text" name="redirect_url"
+							value="https://payment.tantrotsav.co.in/ccavResponseHandler" />
+					</td>
+				</tr>
+				<tr hidden>
+					<td>Cancel URL</td>
+					<td><input type="text" name="cancel_url"
+							value="https://payment.tantrotsav.co.in/ccavResponseHandler" />
+					</td>
+				</tr>
+				<tr>
+					<td>Language</td>
+					<td><input type="text" name="language" id="language" value="EN" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input class="sub" type="submit" value="Checkout"></td>
+				</tr>
+			</table>
+			<p>⚠️Discliamer: If the amount is not displayed, please close the tab and click the payment button again.
+			</p>
+		</form>
+	</div>
+	<script src="./crypto-js.min.js"></script>
 	<script>
 		// Get the query string from the URL
+		window.addEventListener('devtoolschange', event => {
+			if (event.detail.isOpen) {
+				alert('Developer tools are not allowed!');
+			}
+		});
+
+		// Trigger a detection event when the page loads
+		new Promise(resolve => {
+			window.dispatchEvent(new Event('devtoolschange'));
+			resolve();
+		});
+		window.addEventListener('contextmenu', function (e) {
+			e.preventDefault();
+		}, false);
+
+		window.addEventListener('keydown', function (e) {
+			if (e.ctrlKey && e.shiftKey && e.keyCode === 73) { // Disables Ctrl+Shift+I
+				e.preventDefault();
+			}
+			if (e.ctrlKey && e.keyCode === 67) { // Disables Ctrl+C
+				e.preventDefault();
+			}
+		}, false);
 		const queryString = window.location.search;
 
 		// Parse the query string to get an object of key-value pairs
 		const urlParams = new URLSearchParams(queryString);
-
+		const passphrase = "U2FsdGVkX19GgWeS66m0xxRUVxfpI60uVkWRedyU15I"
 		// Get the value of the 'param' parameter from the URL
 		const paramValue = urlParams.get('amount');
+		console.log(paramValue)
 		const orderParam = urlParams.get('orderID');
 
+
+		// const amountDep = decryptWithAES(paramValue);
+		const amountDep = CryptoJS.AES.decrypt(paramValue, passphrase).toString(CryptoJS.enc.Utf8);
+		console.log("working")
+		console.log(amountDep)
 		// Set the value of the input element to the parameter value
-		document.getElementById('amount').value = paramValue;
-		document.getElementById('dup').value = paramValue;
+		document.getElementById('amount').value = amountDep;
+		document.getElementById('dup').value = amountDep;
 		document.getElementById('order_id').value = orderParam;
 		document.getElementById('order_dup').value = orderParam;
 	</script>
